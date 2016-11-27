@@ -2,18 +2,28 @@
 
 var express = require('express');
 var router = express.Router();
+var User = require('../models/user');
 
 router.get('/', function (req, res, next) {
-    res.render('index'); // refers to index.hbs file
+    User.findOne({}, function(err, doc) {
+      if(err) {
+          return res.send('Error!');
+      }
+      res.render('node', {email: doc.email});
+    });
+    // all code outside of the callback won't have data
 });
 
-router.get('/message/:msg', function (req, res, next) {
-    res.render('node', {message: req.params.msg}); // params refers to parameters encoded in the url
-});
-
-router.post('/message', function (req, res, next) {
-   var message = req.body.message;
-   res.redirect('/message/' + message); // redirect to get route, encodes message in URL
+router.post('/', function (req, res, next) {
+   var email = req.body.email;
+   var user = new User({
+       firstName: 'Jordan',
+       lastName: 'Purinton',
+       password: 'topsecret',
+       email: email
+   });
+   user.save(); // store user object in users collection
+   res.redirect('/');
 });
 
 module.exports = router;
