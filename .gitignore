@@ -2,3 +2,5 @@
 node_modules
 diagnostic.data
 journal
+npm-debug.log
+public/js
