@@ -1,4 +1,4 @@
-import {Component, Input} from "@angular/core";
+import {Component, Input, Output, EventEmitter} from "@angular/core";
 import {Message} from "./message.model";
 
 @Component({
@@ -22,4 +22,9 @@ import {Message} from "./message.model";
 
 export class MessageComponent{
     @Input() message: Message; // allows to pass an argument with property binding
+    @Output() editClicked = new EventEmitter<string>();
+
+    onEdit() {
+        this.editClicked.emit('New value'); // emits new event
+    }
 }
