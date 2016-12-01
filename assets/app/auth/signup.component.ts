@@ -7,15 +7,15 @@ import {FormGroup, FormControl, Validators} from "@angular/forms";
 })
 
 export class SignupComponent implements OnInit{
-    signUpForm: FormGroup;
+    authForm: FormGroup;
 
     onSubmit() {
-        console.log(this.signUpForm);
-        this.signUpForm.reset();
+        console.log(this.authForm);
+        this.authForm.reset();
     }
 
     ngOnInit() {
-        this.signUpForm = new FormGroup({
+        this.authForm = new FormGroup({
             firstName: new FormControl(null, Validators.required),
             lastName: new FormControl(null, Validators.required),
             email: new FormControl(null, [
