@@ -12,9 +12,13 @@ export class MessageInputComponent{
     constructor(private messageService: MessageService) {}
 
     onSubmit(form: NgForm) { // value is from the #input value we grab from the form
-        console.log(form);
         const message = new Message(form.value.content, 'Jordan');
-        this.messageService.addMessage(message);
+        this.messageService.addMessage(message)
+            .subscribe(
+                data => console.log(data),
+                error => console.error(error),
+
+            );
         form.resetForm();
     }
 }

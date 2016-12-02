@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
 var appRoutes = require('./routes/app');
-var messageRoutes = require('./routes/message');
+var messageRoutes = require('./routes/messages');
 var userRoutes = require('./routes/user');
 
 var app = express();
