@@ -1,6 +1,6 @@
 # mean-stack-project
 
-This is a small side project I'm working on where I'm building a messenger-like application utilizing the MEAN stack with Angular 2. 
+This is a small side project I'm working on where I'm building a social media messenger-like application utilizing the MEAN stack with Angular 2. 
 
 1.) Run `npm install` to install all required dependencies.
 
