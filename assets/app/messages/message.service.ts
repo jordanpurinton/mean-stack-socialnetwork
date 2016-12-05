@@ -20,7 +20,17 @@ export class MessageService {
     }
 
     getMessages(){
-        return this.messages;
+        return this.http.get('http://localhost:3000/message') // no need to send body/headers since we aren't sending data
+            .map((response: Response) => {
+                const messages = response.json().obj;
+                let formattedMessages: Message[] = [];
+                for (let message of messages) {  // es6 for itterating through array
+                    formattedMessages.push(new Message(message.content, 'Test', message.id, null))
+                }
+                this.messages = formattedMessages; // array we return is also the same
+                return formattedMessages; // will automatically create new observable w/ formatted messages
+            })
+            .catch((error: Response) => Observable.throw(error.json()));
     }
 
     deleteMessage(message: Message) {
