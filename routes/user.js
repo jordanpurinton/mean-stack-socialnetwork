@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var secret = require('bcryptjs');
-var User = required('../models/user');
+var User = require('../models/user');
 
 router.post('/', function (req, res, next) { // TODO integrate SSL
     var user = new User ({
