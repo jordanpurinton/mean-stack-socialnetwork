@@ -18,7 +18,7 @@ router.post('/', function (req, res, next) { // TODO integrate SSL
             });
         }
         res.status(201).json({
-            message: 'User created!',
+            message: 'User created',
             obj: result
         })
 
