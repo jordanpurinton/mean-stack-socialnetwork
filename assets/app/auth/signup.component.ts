@@ -15,10 +15,10 @@ export class SignupComponent implements OnInit{
 
     onSubmit() {
         const user = new User(
-            this.authForm.value.firstName,
-            this.authForm.value.lastName,
             this.authForm.value.email,
-            this.authForm.value.password
+            this.authForm.value.password,
+            this.authForm.value.firstName,
+            this.authForm.value.lastName
         );
         this.authService.signup(user)
             .subscribe(
