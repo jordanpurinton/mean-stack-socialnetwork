@@ -1,4 +1,4 @@
-# mean-stack-project
+# mean-stack-socialnetwork
 
 This is a small side project I'm working on where I'm building a social media messenger-like application utilizing the MEAN stack with Angular 2. 
 
