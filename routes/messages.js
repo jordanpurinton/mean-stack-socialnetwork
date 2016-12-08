@@ -22,7 +22,7 @@ router.get('/', function (req, res, next) { // route '/' is /messages in this co
 });
 
 router.use('/', function (req, res, next) { // will be used on every request except .get('/')
-    jwt.verify(req.query.token, 'secret', function(err, decoded){ // gives access to all query params, checks for token in params
+    jwt.verify(req.query.token, 'secret', function (err, decoded) { // gives access to all query params, checks for token in params
         if (err) {
             return res.status(401).json({ // not authorized
                 title: 'Authentication failed',
@@ -35,7 +35,7 @@ router.use('/', function (req, res, next) { // will be used on every request exc
 
 router.post('/', function (req, res, next) { // this remains as '/' because we only go here if it begins with /messages
     var decoded = jwt.decode(req.query.token); // no need to reuse verify since we did above
-    User.findById(decoded.user._id, function(err, user){ // get user from db
+    User.findById(decoded.user._id, function (err, user) { // get user from db
         if (err) {
             return res.status(500).json({
                 title: 'An error occured',
@@ -64,6 +64,7 @@ router.post('/', function (req, res, next) { // this remains as '/' because we o
 });
 
 router.patch('/:id', function (req, res, next) {
+    var decoded = jwt.decode(req.query.token);
     Message.findById(req.params.id, function (err, message) {
         if (err) {
             return res.status(500).json({
@@ -75,6 +76,12 @@ router.patch('/:id', function (req, res, next) {
             return res.status(500).json({
                 title: 'Message not found!',
                 error: {message: 'Message not found!'}
+            });
+        }
+        if (message.user != decoded.user._id) {
+            return res.status(500).json({
+                title: 'User not authorized to view content',
+                error: {message: 'User ids do not match'}
             });
         }
         message.content = req.body.content;
@@ -94,6 +101,7 @@ router.patch('/:id', function (req, res, next) {
 });
 
 router.delete('/:id', function (req, res, next) {
+    var decoded = jwt.decode(req.query.token);
     Message.findById(req.params.id, function (err, message) {
         if (err) {
             return res.status(500).json({
@@ -105,6 +113,12 @@ router.delete('/:id', function (req, res, next) {
             return res.status(500).json({
                 title: 'Message not found!',
                 error: {message: 'Message not found!'}
+            });
+        }
+        if (message.user != decoded.user._id) {
+            return res.status(500).json({
+                title: 'User not authorized to view content',
+                error: {message: 'User ids do not match'}
             });
         }
         message.remove(function (err, result) {
