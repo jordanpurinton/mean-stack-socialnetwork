@@ -47,13 +47,13 @@ router.post('/', function (req, res, next) { // this remains as '/' because we o
         });
         message.save(function (err, message) {
             if (err) {
-                user.messages.push(message); // add new message to stack of messages
-                user.save();
                 return res.status(500).json({
                     title: 'An error occured',
                     error: err
                 });
             }
+            user.messages.push(message); // add new message to stack of messages
+            user.save();
             res.status(201).json({
                 message: 'Message saved',
                 obj: message
