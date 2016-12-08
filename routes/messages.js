@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Message = require('../models/message');
 var jwt = require('jsonwebtoken');
+var User = require('../models/user');
 
 router.get('/', function (req, res, next) { // route '/' is /messages in this context
     Message.find()
@@ -32,20 +33,32 @@ router.use('/', function (req, res, next) { // will be used on every request exc
 });
 
 router.post('/', function (req, res, next) { // this remains as '/' because we only go here if it begins with /messages
-    var message = new Message({
-        content: req.body.content
-    });
-    message.save(function (err, result) {
+    var decoded = jwt.decode(req.query.token); // no need to reuse verify since we did above
+    User.findById(decoded.user._id, function(err, user){ // get user from db
         if (err) {
             return res.status(500).json({
                 title: 'An error occured',
                 error: err
             });
         }
-        res.status(201).json({
-            message: 'Message saved',
-            obj: result
-        })
+        var message = new Message({
+            content: req.body.content,
+            user: user
+        });
+        message.save(function (err, message) {
+            if (err) {
+                user.messages.push(message); // add new message to stack of messages
+                user.save();
+                return res.status(500).json({
+                    title: 'An error occured',
+                    error: err
+                });
+            }
+            res.status(201).json({
+                message: 'Message saved',
+                obj: message
+            });
+        });
     });
 });
 
