@@ -7,8 +7,8 @@ var schema = new Schema({
                                         // we store in the database, ID automatically created
 });
 
-schema.post('remove',function(message){  // execute when message is removed in messages.js
-    User.findById(message.user, function(err, user){
+schema.post('remove', function (message) {  // execute when message is removed in messages.js
+    User.findById(message.user, function (err, user) {
         user.messages.pull(message);
         user.save();
     });
