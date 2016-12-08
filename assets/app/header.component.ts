@@ -14,5 +14,5 @@ import {Component} from '@angular/core';
 })
 
 export class HeaderComponent{
-
+    loginMessage = 'You are logged in as ' + localStorage.getItem('firstName');
 }
