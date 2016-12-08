@@ -6,6 +6,7 @@ var User = require('../models/user');
 
 router.get('/', function (req, res, next) { // route '/' is /messages in this context
     Message.find()
+        .populate('user', 'firstName') // each message will also contain user_id and firstName
         .exec(function (err, messages) {
             if (err) {
                 return res.status(500).json({ // exit if error

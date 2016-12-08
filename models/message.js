@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 var User = require('./user');
 var schema = new Schema({
     content: {type: String, required: true}, // defines how this should look like
-    user: {type: Schema.Types.ObjectId} // internal type mongoose uses to store IDs of different objects
+    user: {type: Schema.Types.ObjectId, ref: 'User'} // internal type mongoose uses to store IDs of different objects
                                         // we store in the database, ID automatically created
 });
 
