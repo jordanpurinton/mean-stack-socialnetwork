@@ -74,14 +74,14 @@ router.patch('/:id', function (req, res, next) {
         }
         if (!message) {
             return res.status(500).json({
-                title: 'Message not found!',
+                title: 'Edit failed',
                 error: {message: 'Message not found!'}
             });
         }
         if (message.user != decoded.user._id) {
             return res.status(500).json({
-                title: 'User not authorized to view content',
-                error: {message: 'User ids do not match'}
+                title: 'Authorization failed',
+                error: {message: 'User IDs do not match'}
             });
         }
         message.content = req.body.content;
@@ -111,7 +111,7 @@ router.delete('/:id', function (req, res, next) {
         }
         if (!message) {
             return res.status(500).json({
-                title: 'Message not found!',
+                title: 'Delete failed',
                 error: {message: 'Message not found!'}
             });
         }

@@ -15,6 +15,7 @@ import {SigninComponent} from "./auth/signin.component";
 import {HttpModule} from "@angular/http";
 import {AuthService} from "./auth/auth.service";
 import {ErrorComponent} from "./errors/error.component";
+import {ErrorService} from "./errors/error.service";
 
 @NgModule({ // decorator defines what I'm going to use in addition to the class AppModule
     declarations: [
@@ -37,7 +38,7 @@ import {ErrorComponent} from "./errors/error.component";
         ReactiveFormsModule,
         HttpModule],
 
-    providers: [AuthService],
+    providers: [AuthService, ErrorService],
     bootstrap: [AppComponent] // set root component
 })
 export class AppModule {

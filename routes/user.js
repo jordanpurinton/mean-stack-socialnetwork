@@ -36,13 +36,13 @@ router.post('/signin', function(req, res, next) {
         }
         if (!user) { // user not found
             return res.status(401).json({
-                title: 'Email or password were incorrect',
+                title: 'Sign in failed',
                 error: {message: 'Email or password were incorrect'}
             })
         }
         if (!secret.compareSync(req.body.password, user.password)) { // password is not the same
             return res.status(401).json({
-                title: 'Email or password were incorrect',
+                title: 'Sign in failed',
                 error: {message: 'Email or password were incorrect'}
             });
         }
