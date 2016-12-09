@@ -14,6 +14,7 @@ import {SignupComponent} from "./auth/signup.component";
 import {SigninComponent} from "./auth/signin.component";
 import {HttpModule} from "@angular/http";
 import {AuthService} from "./auth/auth.service";
+import {ErrorComponent} from "./errors/error.component";
 
 @NgModule({ // decorator defines what I'm going to use in addition to the class AppModule
     declarations: [
@@ -26,7 +27,8 @@ import {AuthService} from "./auth/auth.service";
         HeaderComponent,
         LogoutComponent,
         SignupComponent,
-        SigninComponent
+        SigninComponent,
+        ErrorComponent
     ],
     imports: [
         BrowserModule,
