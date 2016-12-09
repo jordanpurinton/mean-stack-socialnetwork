@@ -2,6 +2,8 @@
 
 This is a small side project I'm working on where I'm building a social media messenger-like application utilizing the MEAN stack with Angular 2. 
 
+The program functions as a message board where one can: Sign Up, Sign In and posts messages to the message board.
+
 1.) Run `npm install` to install all required dependencies.
 
 2.) Run `npm start` in your CLI. 
